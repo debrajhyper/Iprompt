@@ -1,3 +1,13 @@
+[] Implement Search
+    - Search by prompt
+    - search by tag
+    - search by username
+[] Implement click on tag
+    - automatically fill the search by tag
+[] Implement view other profiles
+[] Implement share post feature for every prompts
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
