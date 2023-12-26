@@ -3,11 +3,11 @@
 import { useState, useEffect } from "react"
 import PromptCard from "./PromptCard"
 
-const PromptCardList = ({ data, handleTagClick }: { data: Post[], handleTagClick: Function }) => {
+const PromptCardList = ({ data, handleTagClick }: { data: ProfilePost[], handleTagClick: Function }) => {
     return (
         <div className="mt-10 prompt_layout">
             {
-                data.map((post: Post) => (
+                data.map((post: ProfilePost) => (
                     <PromptCard key={post._id} post={post} handleTagClick={handleTagClick} handleEdit={() => { }} handleDelete={() => { }} />
                 ))
             }
@@ -17,7 +17,7 @@ const PromptCardList = ({ data, handleTagClick }: { data: Post[], handleTagClick
 
 export default function Feed() {
     const [searchText, setSearchText] = useState('');
-    const [posts, setPosts] = useState<Post[]>([]);
+    const [posts, setPosts] = useState<ProfilePost[]>([]);
 
     const handleSearchChange = (e: any) => {
         setSearchText(e.target.value);

@@ -10,10 +10,12 @@ export default function CreatePrompt() {
     const router = useRouter();
 
     const [submitting, setSubmitting] = useState(false);
-    const [post, setPost] = useState({
+    const [post, setPost] = useState<Post>({
         prompt: '',
-        tag: '',
+        tag: []
     });
+
+    console.log(post);
 
     const createPrompt = async (e: any) => {
         e.preventDefault();
@@ -40,10 +42,6 @@ export default function CreatePrompt() {
             setSubmitting(false);
         }
     }
-
-    // if (!session?.user) {
-    //     return router.push(HOME_LINK)
-    // }
 
     return (
         <Form

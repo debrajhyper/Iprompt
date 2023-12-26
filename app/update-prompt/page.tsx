@@ -11,10 +11,10 @@ export default function UpdatePrompt() {
     const promptId = searchParams.get('id');
     const router = useRouter();
 
-    const [submitting, setSubmitting] = useState(false);
-    const [post, setPost] = useState({
+    const [submitting, setSubmitting] = useState<boolean>(false);
+    const [post, setPost] = useState<Post>({
         prompt: '',
-        tag: '',
+        tag: [],
     });
 
     const updatePrompt = async (e: any) => {

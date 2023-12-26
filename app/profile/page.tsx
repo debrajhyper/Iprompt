@@ -8,13 +8,13 @@ export default function MyProfile() {
     const { data: session } = useSession();
     const router = useRouter();
     // console.log('USER SESSION ->', session);
-    const [posts, setPosts] = useState<Post[]>([]);
+    const [posts, setPosts] = useState<ProfilePost[]>([]);
 
-    const handleEdit = (post: Post) => {
+    const handleEdit = (post: ProfilePost) => {
         router.push(`/update-prompt?id=${post._id}`)
     }
 
-    const handleDelete = async (post: Post) => {
+    const handleDelete = async (post: ProfilePost) => {
         const hasConfirmed = confirm("Are you sure you want to delete this prompt?");
 
         if (hasConfirmed) {

@@ -32,7 +32,7 @@ export default function Navbar() {
     }, [providers])
 
     return (
-        <nav className="w-full top-0 flex-between mb-16 py-3 px-20 backdrop-blur-sm z-50">
+        <nav className="w-full top-0 flex-between mb-10 py-3 px-20 backdrop-blur-sm z-50">
             <Link href={HOME_LINK} className="flex gap-2 flex-center">
                 <Image src='/assets/images/logo.svg' alt="Iprompt Logo" width={30} height={30} className="object-content" />
                 <p className="logo_text">Iprompt</p>

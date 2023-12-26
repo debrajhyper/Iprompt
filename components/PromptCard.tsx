@@ -4,7 +4,15 @@ import Image from "next/image"
 import { useSession } from "next-auth/react"
 import { usePathname, useRouter } from "next/navigation"
 
-export default function PromptCard({ post, handleTagClick, handleEdit, handleDelete }: { post: Post, handleTagClick: Function, handleEdit: MouseEventHandler<HTMLParagraphElement>, handleDelete: MouseEventHandler<HTMLParagraphElement> }) {
+
+type PromptCardProps = {
+    post: ProfilePost,
+    handleTagClick: Function,
+    handleEdit: MouseEventHandler<HTMLParagraphElement>,
+    handleDelete: MouseEventHandler<HTMLParagraphElement>
+}
+
+export default function PromptCard({ post, handleTagClick, handleEdit, handleDelete }: PromptCardProps) {
     const { data: session } = useSession();
     const pathName = usePathname();
     const router = useRouter();
@@ -31,26 +39,32 @@ export default function PromptCard({ post, handleTagClick, handleEdit, handleDel
                         </p>
                     </div>
                 </div>
-                <div className="copy_btn" onClick={handleCopy}>
-                    <Image src={copied === post.prompt ? '/assets/icons/tick.svg' : '/assets/icons/copy.svg'} alt="copy" width={12} height={12} />
+                <div className="flex gap-2">
+                    <div className="copy_btn" onClick={handleCopy}>
+                        <Image src={copied !== post.prompt ? '/assets/icons/expand.svg' : '/assets/icons/shrink.svg'} alt="expand" width={14} height={14} />
+                    </div>
+                    <div className="copy_btn" onClick={handleCopy}>
+                        <Image src={copied === post.prompt ? '/assets/icons/tick.svg' : '/assets/icons/copy.svg'} alt="copy" width={14} height={14} />
+                    </div>
                 </div>
             </div>
-            <p className="my-4 font-satoshi text-sm text-gray-700">
+            <p className="my-4 font-satoshi text-sm text-gray-700 line-clamp-3">
                 {post.prompt}
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, est aut cum sapiente dicta hic beatae, id magnam ea placeat aperiam non numquam magni quibusdam sint deserunt facilis laborum qui?
             </p>
-            <p onClick={() => handleTagClick && handleTagClick(post.tag)} className="font-inter text-sm blue_gradient cursor-pointer">
+            <p onClick={() => handleTagClick && handleTagClick(post.tag)} className="font-inter text-sm blue_gradient cursor-pointer underline hover:underline-offset-2">
                 {post.tag}
             </p>
 
             {
                 (session?.user as { id: String })?.id === post.creator._id && pathName === '/profile' && (
-                    <div className="mt-5 flex-end gap-5 border-t border-gray-300 pt-3">
-                        <p onClick={handleEdit} className="font-inter text-sm green_gradient cursor-pointer">
+                    <div className="font-inter mt-5 flex-end gap-5 border-t border-gray-300 pt-3">
+                        <button onClick={() => handleEdit} className="w-20 px-5 py-1.5 text-sm bg-green-500 border-2 border-green-500 rounded-full text-white cursor-pointer">
                             Edit
-                        </p>
-                        <p onClick={handleDelete} className="font-inter text-sm orange_gradient cursor-pointer">
+                        </button>
+                        <button onClick={() => handleDelete} className={`w-20 px-5 py-1.5 text-sm border-2 border-red-500 text-red-500 rounded-full hover:bg-red-500 hover:text-white cursor-pointer`}>
                             Delete
-                        </p>
+                        </button>
                     </div>
                 )
             }

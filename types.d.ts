@@ -1,12 +1,4 @@
-type Profile = {
-    name: String,
-    description: String,
-    data: Post[],
-    handleEdit: Function,
-    handleDelete: Function
-}
-
-type Post = {
+type ProfilePost = {
     [x: string]: any
     _id: string;
     creator: {
@@ -18,5 +10,18 @@ type Post = {
     };
     prompt: string;
     __v: number;
-    tag?: string; // Optional property if present in some objects
-};
+    tag?: string;
+}
+
+type Profile = {
+    name: String,
+    description: String,
+    data: ProfilePost[],
+    handleEdit: Function,
+    handleDelete: Function
+}
+
+type Post = {
+    prompt: string,
+    tag: string[]
+}

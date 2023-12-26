@@ -96,6 +96,10 @@
         @apply bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent;
     }
 
+    .orange_gradient_simple {
+        @apply bg-gradient-to-r from-orange-600 to-amber-500 bg-clip-text text-transparent;
+    }
+
     .green_gradient {
         @apply bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent;
     }
@@ -133,11 +137,11 @@
 
     /* Form Component */
     .form_textarea {
-        @apply w-full flex rounded-lg h-[200px] mt-2 p-3 text-sm text-gray-500 outline-0;
+        @apply w-full flex rounded-lg h-[200px] mt-2 p-3 text-sm text-gray-500 outline-0 border-2;
     }
 
     .form_input {
-        @apply w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0;
+        @apply w-full flex rounded-lg mt-2 p-2 text-sm text-gray-500 outline-0 border-2;
     }
 
     /* Nav Component */
@@ -173,4 +177,11 @@
     .flex-between {
         @apply flex justify-between items-center;
     }
+}
+
+.prompt_card {
+    background: rgba(255, 255, 255, 0.1), url(https://grainy-gradients.vercel.app/noise.svg);
+    backdrop-filter: blur(5px);
+    /* box-shadow: 0 5px 15px 5px rgba(0, 0, 0, 0.1); */
+    /* border: 1px solid rgba(255, 255, 255, 0.5); */
 }
