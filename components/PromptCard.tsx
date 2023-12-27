@@ -1,5 +1,5 @@
 'use client'
-import { MouseEventHandler, useState } from "react"
+import { useState } from "react"
 import Image from "next/image"
 import { useSession } from "next-auth/react"
 import { usePathname, useRouter } from "next/navigation"
@@ -8,8 +8,8 @@ import { usePathname, useRouter } from "next/navigation"
 type PromptCardProps = {
     post: ProfilePost,
     handleTagClick: Function,
-    handleEdit: MouseEventHandler<HTMLParagraphElement>,
-    handleDelete: MouseEventHandler<HTMLParagraphElement>
+    handleEdit: Function,
+    handleDelete: Function,
 }
 
 export default function PromptCard({ post, handleTagClick, handleEdit, handleDelete }: PromptCardProps) {
@@ -25,6 +25,7 @@ export default function PromptCard({ post, handleTagClick, handleEdit, handleDel
             setCopied("");
         }, 3000);
     }
+
     return (
         <div className="prompt_card">
             <div className="flex justify-between items-start gap-5">
@@ -52,17 +53,22 @@ export default function PromptCard({ post, handleTagClick, handleEdit, handleDel
                 {post.prompt}
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, est aut cum sapiente dicta hic beatae, id magnam ea placeat aperiam non numquam magni quibusdam sint deserunt facilis laborum qui?
             </p>
-            <p onClick={() => handleTagClick && handleTagClick(post.tag)} className="font-inter text-sm blue_gradient cursor-pointer underline hover:underline-offset-2">
-                {post.tag}
-            </p>
-
+            <div className="truncate line-clamp-1">
+                {
+                    post?.tag?.map((tag, index) => (
+                        <span key={index} onClick={() => handleTagClick && handleTagClick(post.tag)} className="pr-1 font-inter text-sm blue_gradient cursor-pointer underline hover:underline-offset-2">
+                            {tag}
+                        </span>
+                    ))
+                }
+            </div>
             {
                 (session?.user as { id: String })?.id === post.creator._id && pathName === '/profile' && (
                     <div className="font-inter mt-5 flex-end gap-5 border-t border-gray-300 pt-3">
-                        <button onClick={() => handleEdit} className="w-20 px-5 py-1.5 text-sm bg-green-500 border-2 border-green-500 rounded-full text-white cursor-pointer">
+                        <button onClick={() => handleEdit(post)} className="w-20 px-5 py-1.5 text-sm bg-green-500 border-2 border-green-500 rounded-full text-white cursor-pointer">
                             Edit
                         </button>
-                        <button onClick={() => handleDelete} className={`w-20 px-5 py-1.5 text-sm border-2 border-red-500 text-red-500 rounded-full hover:bg-red-500 hover:text-white cursor-pointer`}>
+                        <button onClick={() => handleDelete(post)} className={`w-20 px-5 py-1.5 text-sm border-2 border-red-500 text-red-500 rounded-full hover:bg-red-500 hover:text-white cursor-pointer`}>
                             Delete
                         </button>
                     </div>

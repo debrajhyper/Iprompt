@@ -10,7 +10,7 @@ type ProfilePost = {
     };
     prompt: string;
     __v: number;
-    tag?: string;
+    tag?: string[];
 }
 
 type Profile = {

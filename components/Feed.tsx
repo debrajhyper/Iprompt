@@ -1,5 +1,4 @@
 'use client'
-
 import { useState, useEffect } from "react"
 import PromptCard from "./PromptCard"
 
@@ -17,7 +16,7 @@ const PromptCardList = ({ data, handleTagClick }: { data: ProfilePost[], handleT
 
 export default function Feed() {
     const [searchText, setSearchText] = useState('');
-    const [posts, setPosts] = useState<ProfilePost[]>([]);
+    const [profilePost, setProfilePost] = useState<ProfilePost[]>([]);
 
     const handleSearchChange = (e: any) => {
         setSearchText(e.target.value);
@@ -28,7 +27,7 @@ export default function Feed() {
             try {
                 const res = await fetch('/api/prompt');
                 const data = await res.json();
-                setPosts(data);
+                setProfilePost(data);
             } catch (error) {
                 console.error("Error fetching posts:", error);
             }
@@ -50,7 +49,7 @@ export default function Feed() {
                     required
                 />
             </form>
-            <PromptCardList data={posts} handleTagClick={() => { }} />
+            <PromptCardList data={profilePost} handleTagClick={() => { }} />
         </section>
     )
 }
